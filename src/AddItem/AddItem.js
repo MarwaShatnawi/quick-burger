@@ -48,12 +48,13 @@ class AddItem extends Component {
                         <div>
                             <h2>Success!</h2>
                             <p>Thanks,</p>
-                            <button className="btn btn-success btn-block" onClick={this.addNewItem.bind(this)}>Add Item</button>
+                            <button className="btn btn-success btn-block" 
+                            onClick={this.addNewItem.bind(this)}>Add Item</button>
                         </div>
                     ) : (
                         <form onSubmit={this.postItem.bind(this)}>
                             <div className="form-group">
-                                <label for="item-name">Item Name</label>
+                                <label htmlFor="item-name">Item Name</label>
                                 <input 
                                     name="itemDesc"
                                     defaultValue={this.state.itemDesc} 
@@ -65,7 +66,7 @@ class AddItem extends Component {
                                 />
                             </div>
                             <div className="form-group">
-                                <label forHtml="item-price">Item Price</label>
+                                <label htmlFor="item-price">Item Price</label>
                                 <input 
                                     name="itemPrice" 
                                     defaultValue={this.state.itemPrice} 

@@ -13,7 +13,7 @@ const Menu = (props) => (
             Price: {props.price}
         </p>
         <p>
-            <button onClick={()=> props.delEvent(props.id)} className="btn btn-primary" role="button">Select</button>    
+        <button onClick={()=> props.delEvent(props.id)} className="btn btn-primary" role="button">Select</button>    
         </p>
       </div>
     </div>

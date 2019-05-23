@@ -103,7 +103,9 @@ render(){
         }
         </ul>
         <div className="clearfix">
-          <button className="pull-right btn btn-success" onClick={this.Post.bind(this)} disabled={this.state.bill.length ===0}>Checkout</button>
+          <button className="pull-right btn btn-success" 
+          onClick={this.Post.bind(this)} 
+          disabled={this.state.bill.length ===0}>Checkout</button>
           <h3 className="pull-left">Total: {this.state.total} JOD</h3>
         </div>
         </div>
