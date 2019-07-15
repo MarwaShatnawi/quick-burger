@@ -1,5 +1,7 @@
 import React,{Component} from 'react';
 import axios from 'axios';
+import { connect } from 'react-redux';
+import { selectMenuItem } from '../actions/menuActions';
 import './add-item.css';
 
 class AddItem extends Component {
@@ -8,23 +10,36 @@ class AddItem extends Component {
         itemPrice: null,
         done: false
     }
-  postItem(e){
-    e.preventDefault();
-    let data={
-        itemDesc: this.state.itemDesc,
-        itemPrice: this.state.itemPrice,
-       };
-    if(this.state.itemDesc && this.state.itemPrice){
-        axios.post('http://94.127.209.194:3333/AudioGramServices/webapi/myresource/postmenu',data)
-    .then(response=>{
-    console.log(response) 
-    this.setState({
-        done: true
-    })
-   })
+
+    postItem(e){
+        e.preventDefault();
+    //     let data={
+    //         itemDesc: this.state.itemDesc,
+    //         itemPrice: this.state.itemPrice,
+    //        };
+    //     if(this.state.itemDesc && this.state.itemPrice){
+    //         axios.post('http://94.127.209.194:3333/AudioGramServices/webapi/myresource/postmenu',data)
+    //     .then(response=>{
+    //     console.log(response) 
+    //     this.setState({
+    //         done: true
+    //     })
+    //    })
+        if(this.state.itemDesc && this.state.itemPrice){
+            let menu = this.props.menu;
+            let newItem = {
+                itemId: menu.length + 1,
+                itemDesc: this.state.itemDesc,
+                itemPrice: this.state.itemPrice
+            }
+            menu.push(newItem);
+            this.props.selectMenuItem(menu);
+            this.setState({
+                done: true
+            })
+        }
     }
     
-  }
   inputChange(e){
     let value = e.target.value
     let name = e.target.name
@@ -87,6 +102,21 @@ class AddItem extends Component {
   }
 
 }
-export default AddItem;
+
+const mapPropsToState = (state) => {
+    return {
+      menu: state.menu
+    }
+  }
+  
+  const mapDispatchToProps = (dispatch) => {
+    return {
+      selectMenuItem: (item) => {
+        dispatch(selectMenuItem(item))
+      }
+    }
+  }
+  
+  export default connect(mapPropsToState, mapDispatchToProps)(AddItem);
 
 

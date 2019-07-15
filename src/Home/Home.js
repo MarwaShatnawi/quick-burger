@@ -15,29 +15,33 @@ class Home extends Component {
   }
 
   componentDidMount(){
-    axios.get('http://94.127.209.194:3333/AudioGramServices/webapi/myresource/menu')
-    .then(response=>{
-      const {data} = response;
-      //this.setState({menu:data})
-    });
+    // axios.get('http://94.127.209.194:3333/AudioGramServices/webapi/myresource/menu')
+    // .then(response=>{
+    //   const {data} = response;
+    //   //this.setState({menu:data})
+    // });
   }
 
   Post=()=>{
     console.log(this.state.bill)
-    let data=null;
-    this.state.bill.map(item=>{
-      data={
-        orderUserName: "marwashatnawi",
-        orderItemId: item.itemId,
-        orderPrice:  item.itemPrice,
-      }
-    })
-    axios.post('http://94.127.209.194:3333/AudioGramServices/webapi/myresource/post',data)
-    .then(response=>{
-      console.log(response) 
-      this.setState({
-        done: true
-      })
+    // let data=null;
+    // this.state.bill.map(item=>{
+    //   data={
+    //     orderUserName: "marwashatnawi",
+    //     orderItemId: item.itemId,
+    //     orderPrice:  item.itemPrice,
+    //   }
+    // })
+    // axios.post('http://94.127.209.194:3333/AudioGramServices/webapi/myresource/post',data)
+    // .then(response=>{
+    //   console.log(response) 
+    //   this.setState({
+    //     done: true
+    //   })
+    // })
+
+    this.setState({
+      done: true
     })
   }
 
@@ -47,7 +51,7 @@ class Home extends Component {
     let total = this.props.total;
     let index = menu.indexOf(id);
     bill.push(menu[index]);
-    total = total + menu[index].itemPrice;
+    total = parseInt(total) + parseInt(menu[index].itemPrice);
     menu.splice(index, 1);
   
     this.props.billAddItem(bill);
@@ -116,7 +120,6 @@ class Home extends Component {
 }
 
 const mapPropsToState = (state) => {
-  debugger;
   return {
     bill: state.bill,
     total: state.total,
